@@ -26,7 +26,7 @@ omxplayer:
     - mosquitto:mqtt
   volumes:
     - "/opt/vc:/opt/vc"
-    - '~/omxplayer/sound:/sound'
+    - "./sound:/sound"
   devices:
     - "/dev/vchiq:/dev/vchiq"
     - "/dev/fb0:/dev/fb0"
