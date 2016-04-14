@@ -1,7 +1,7 @@
 influx:
   image: sbiermann/rpi-influxdb
   volumes:
-    - ../data/influxdb:/data
+    - ./data/influxdb:/data
   ports:
     - "8083:8083"
     - "8086:8086"
@@ -19,7 +19,7 @@ node-red:
   devices:
     - "/dev/ttyAMA0:/dev/ttyUSB0"
   volumes:
-   - ../data/node-red:/root/.node-red
+   - ./data/node-red:/root/.node-red
 omxplayer:
   image: omxplayer
   links:
