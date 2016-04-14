@@ -1,0 +1,42 @@
+influx:
+  image: sbiermann/rpi-influxdb
+  volumes:
+    - ../data/influxdb:/data
+  ports:
+    - "8083:8083"
+    - "8086:8086"
+mosquitto:
+  image: openenergy/rpi-mosquitto
+  container_name: mosquitto
+  ports:
+    - "1883:1883"
+node-red:
+  image: node-red
+  hostname: op-en-node-red
+  ports:
+    - "1880:1880"
+  links:
+    - mosquitto:mqtt
+  devices:
+    - "/dev/ttyAMA0:/dev/ttyUSB0"
+  volumes:
+   - ../data/node-red:/root/.node-red
+omxplayer:
+  image: omxplayer
+  links:
+    - mosquitto:mqtt
+  volumes:
+    - "/opt/vc:/opt/vc"
+    - '~/omxplayer/sound:/sound'
+  devices:
+    - "/dev/vchiq:/dev/vchiq"
+    - "/dev/fb0:/dev/fb0"
+plugwise:
+  image: openenergy/rpi-plugwise
+  devices:
+    - "/dev/ttyUSB1:/dev/ttyUSB0"
+  links:
+    - mosquitto:mqtt
+  volumes:
+    - ~/plugwise/pw-conf.json:/opt/plugwise/config/pw-conf.json
+    - ~/plugwise/pw-control.json:/opt/plugwise/config/pw-control.json
