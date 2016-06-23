@@ -25,3 +25,4 @@ Do this by:
 ## TODO
 
 - Add missing plugwise configuration
+- Add missing particle.io code for LED strip
